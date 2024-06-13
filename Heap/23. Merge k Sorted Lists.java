@@ -10,13 +10,12 @@
  */
 public class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+      
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         for(ListNode head : lists) {
             while(head != null) {
                 pq.add(head.val);
-                map.put(head.val, map.getOrDefault(head.val, 0) + 1);
                 head = head.next;
             }
         }
@@ -27,7 +26,7 @@ public class Solution {
             int val = pq.poll();
             ListNode newNode = new ListNode(val);
             current.next = newNode;
-            current = current.next;    
+            current = current.next;            
         }
         
         return dummy.next; 
