@@ -1,33 +1,32 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        // Find the frequency of each number
-        Map<Integer, Integer> numFrequencyMap = new HashMap<>();
-        for (int n : nums)
-            numFrequencyMap.put(n, numFrequencyMap.getOrDefault(n, 0) + 1);
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        int n=nums.length;
 
-        PriorityQueue<Map.Entry<Integer, Integer>> topKElements = new PriorityQueue<>(
-                (e1, e2) -> e1.getValue() - e2.getValue());
-
-        // Go through all numbers of the numFrequencyMap and push them into
-        // topKElements, which will have
-        // the top k frequent numbers. If the heap size is more than k, we remove the
-        // smallest (top) number.
-        for (Map.Entry<Integer, Integer> entry : numFrequencyMap.entrySet()) {
-            topKElements.add(entry);
-            if (topKElements.size() > k) {
-                topKElements.poll();
-            }
+        for(int i=0;i<n;i++){
+            mp.put(nums[i],mp.getOrDefault(nums[i],0)+1);
         }
-
-        // Create a list of top k numbers
-        int[] topNumbers = new int[k];
-
-        int i = 0;
-        while (!topKElements.isEmpty()) {
-            topNumbers[i] = topKElements.poll().getKey();
-            i++;
+        PriorityQueue<Pair>pq=new PriorityQueue<>((p1,p2)->p1.fre-p2.fre);
+        for(Map.Entry<Integer,Integer>entry:mp.entrySet()){
+              pq.add(new Pair(entry.getKey(),entry.getValue()));
+              if(pq.size()>k){
+                  pq.poll();
+              }
         }
+        int ans[]=new int[k];
+        int i=0;
+        while(!pq.isEmpty()){
+             ans[i++]=pq.poll().ele;
+        }
+        return ans;
 
-        return topNumbers;
+    }
+}
+class Pair{
+    int ele;
+    int fre;
+    Pair(int ele,int fre){
+         this.ele=ele;
+         this.fre=fre;
     }
 }
