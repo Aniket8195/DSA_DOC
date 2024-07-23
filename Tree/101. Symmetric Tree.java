@@ -21,12 +21,10 @@ class Solution {
              if(root==null && root1==null){
                 return true;
              }
-             if(root!=null && root1==null){
+             if((root!=null && root1==null)||(root==null && root1!=null)){
                 return false;
              }
-             if(root==null && root1!=null){
-                    return false;
-             }
+            
              if(root.val!=root1.val){
                 return false;
              }
