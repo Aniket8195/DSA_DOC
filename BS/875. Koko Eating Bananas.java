@@ -13,7 +13,11 @@ class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         arr = piles;
         long st = 1;
-        long end = (int)(1e9);
+        long max=Long.MIN_VALUE;
+        for(int i=0;i<piles.length;i++){
+           max=Math.max(max,piles[i]);
+        }
+        long end = max;
         long ans = -1;
         while(st<=end){
             long mid = st+(end-st)/2;
