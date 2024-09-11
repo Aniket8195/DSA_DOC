@@ -1,3 +1,6 @@
+//code for next smaller element
+
+
 class Solution {
 	public static int[] help_classmate(int arr[], int n) 
 	{ 
